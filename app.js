@@ -12,7 +12,7 @@ const User = require("./models/user")
 const PORT = process.env.PORT || 1000
 app.use("/api/v1", auth);
 app.use("/api/v2", list);
-app.use(express.static('public'))
+app.use(express.static('uploads'))
 
 
 app.get('/', async (req, res) => {
