@@ -40,6 +40,8 @@ app.post('/upload',upload.single('file'), async (req, res) => {
   res.send(data)
 })
 
+app.use('/uploads', express.static(path.join(__dirname, 'public/Images')));
+
 
 app.listen(1000, () => {
   console.log(`Server Started on port ${PORT}`);
