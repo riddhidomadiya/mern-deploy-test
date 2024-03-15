@@ -16,7 +16,7 @@ app.use(express.static('uploads'))
 
 
 app.get('/', async (req, res) => {
-  	res.send("backend api run....");
+  	res.send("backend api run on server....");
 });
 
 app.get('/userall', async (req, res) => {
@@ -46,5 +46,3 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.listen(1000, () => {
  	console.log(`Server Started on port ${PORT}`);
 });
-
-// test
