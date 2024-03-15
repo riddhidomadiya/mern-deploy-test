@@ -56,7 +56,10 @@ const path = require("path");
 const auth = require("./routes/auth");
 const list = require("./routes/list");
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+	origin: 'https://react-deploy-vercel-steel.vercel.app'
+  }));
 const multer = require('multer');
 const User = require("./models/user")
 const PORT = process.env.PORT || 1000
