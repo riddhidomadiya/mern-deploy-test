@@ -7,7 +7,7 @@ const conn = async (req, res) => {
         "mongodb+srv://user:prabh9592023223@cluster0.z1ljhia.mongodb.net/tasknode"
       )
       .then(() => {
-        console.log("Connected");
+        console.log("database Connected");
       });
   } catch (error) {
     console.log(error);
