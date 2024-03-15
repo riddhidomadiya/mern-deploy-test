@@ -16,33 +16,33 @@ app.use(express.static('public'))
 
 
 app.get('/', async (req, res) => {
-  res.send("backend api run....");
+  	res.send("backend api run....");
 });
 
 app.get('/userall', async (req, res) => {
-  let data = await User.find()
-  res.send(data);
+	let data = await User.find()
+	res.send(data);
 });
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      cb(null, 'public/Images');
-  },
-  filename: function (req, file, cb) {
-      cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname));
-  }
+	destination: function (req, file, cb) {
+		cb(null, 'uploads');
+	},
+	filename: function (req, file, cb) {
+		cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname));
+	}
 });
 
 const upload = multer({ storage: storage });
 
 app.post('/upload',upload.single('file'), async (req, res) => {
-  let data = await User.create({image: req.file.filename})
-  res.send(data)
+	let data = await User.create({image: req.file.filename})
+	res.send(data)
 })
 
-app.use('/uploads', express.static(path.join(__dirname, 'public/Images')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 app.listen(1000, () => {
-  console.log(`Server Started on port ${PORT}`);
+ 	console.log(`Server Started on port ${PORT}`);
 });
