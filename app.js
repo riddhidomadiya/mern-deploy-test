@@ -16,7 +16,8 @@ app.use("/api/v2", list);
 
 
 app.get('/userall', async (req, res) => {
-  res.send('all user get..55');
+  let data = await User.find()
+  res.send(data);
 });
 
 app.get("/", (req, res) => {
