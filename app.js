@@ -25,7 +25,7 @@ app.get('/userall', async (req, res) => {
 	res.send(data);
 });
 
-// Configure Cloudinary with your credentials
+// USING CLOUDNARY WITH MULTER
 	cloudinary.config({
 		cloud_name: 'dsp32g3pc',
 		api_key: '231731453467481',
@@ -42,16 +42,17 @@ app.get('/userall', async (req, res) => {
 
 	app.post('/upload', upload.single('file'), (req, res) => {
 		cloudinary.uploader.upload(req.file.path, (error, result) => {
-		if (error) {
-			console.error(error);
-			return res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
-		} else {
-			return res.status(200).json({ imageUrl: result.secure_url });
-		}
+			if (error) {
+				console.error(error);
+				return res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
+			} else {
+				return res.status(200).json({ imageUrl: result.secure_url });
+			}
 		});
 	});
   
 
+// USING MULTER
 // const storage = multer.diskStorage({
 // 	destination: function (req, file, cb) {
 // 		cb(null, 'uploads');
