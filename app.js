@@ -40,7 +40,7 @@ app.get('/userall', async (req, res) => {
 
   	const upload = multer({ storage: storage });
 
-	app.post('/upload', upload.single('image'), (req, res) => {
+	app.post('/upload', upload.single('file'), (req, res) => {
 		cloudinary.uploader.upload(req.file.path, (error, result) => {
 		if (error) {
 			console.error(error);
