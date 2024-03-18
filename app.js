@@ -25,7 +25,7 @@ app.get('/userall', async (req, res) => {
 	res.send(data);
 });
 
-// USING CLOUDNARY WITH MULTER
+// USING CLOUDINARY WITH MULTER
 	cloudinary.config({
 		cloud_name: 'dj8hzxprn',
 		api_key: '196216894535315',
