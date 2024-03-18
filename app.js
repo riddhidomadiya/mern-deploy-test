@@ -27,9 +27,9 @@ app.get('/userall', async (req, res) => {
 
 // USING CLOUDNARY WITH MULTER
 	cloudinary.config({
-		cloud_name: 'dsp32g3pc',
-		api_key: '231731453467481',
-		api_secret: 'MmzOrF_Zz5QH4AqU7pLlF0y3njQ'
+		cloud_name: 'dj8hzxprn',
+		api_key: '196216894535315',
+		api_secret: 'dm3AvjtLQCpFEDmsa6cL5AsNMIE'
 	});
 
 	const storage = multer.diskStorage({
