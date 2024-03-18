@@ -40,16 +40,51 @@ app.get('/userall', async (req, res) => {
 
   	const upload = multer({ storage: storage });
 
+	// ONLY IMG UPLOAD CODE
+	// app.post('/upload', upload.single('file'), (req, res) => {
+	// 	cloudinary.uploader.upload(req.file.path, (error, result) => {
+	// 		if (error) {
+	// 			console.error(error);
+	// 			return res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
+	// 		} else {
+	// 			return res.status(200).json({ imageUrl: result.secure_url });
+	// 		}
+	// 	});
+	// });
+
+
+	// IMG AND VIDEO BOTH ARE UPLOAD
 	app.post('/upload', upload.single('file'), (req, res) => {
-		cloudinary.uploader.upload(req.file.path, (error, result) => {
-			if (error) {
-				console.error(error);
-				return res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
-			} else {
-				return res.status(200).json({ imageUrl: result.secure_url });
-			}
-		});
+		if (!req.file) {
+			return res.status(400).json({ error: 'No file uploaded' });
+		}
+		
+		const isImage = req.file.mimetype.startsWith('image');
+		const isVideo = req.file.mimetype.startsWith('video');
+	
+		if (isImage) {
+			cloudinary.uploader.upload(req.file.path, (error, result) => {
+				if (error) {
+					console.error(error);
+					return res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
+				} else {
+					return res.status(200).json({ imageUrl: result.secure_url });
+				}
+			});
+		} else if (isVideo) {
+			cloudinary.uploader.upload(req.file.path, { resource_type: 'video' }, (error, result) => {
+				if (error) {
+					console.error(error);
+					return res.status(500).json({ error: 'Failed to upload video to Cloudinary' });
+				} else {
+					return res.status(200).json({ videoUrl: result.secure_url });
+				}
+			});
+		} else {
+			return res.status(400).json({ error: 'Unsupported file type' });
+		}
 	});
+
   
 
 // USING MULTER
